@@ -1,0 +1,269 @@
+<HTML>
+<head>
+<title>
+  Sign UP Page
+</title>
+<meta charset="UTF-8">
+<meta name="viewport"  content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Fira+Sans:wght@300;400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif:wght@700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<script src='https://kit.fontawesome.com/a076d05399.js'></script>
+</head>
+<!-- Stylesheet -->
+<style>
+
+body {
+  background-color: #d6e0f0;
+}
+#main {
+  background-color: #505bda;
+  box-shadow: 10px 10px 8px 10px #888888;
+  padding: 0px;
+  margin-top:1%;
+  margin-bottom: 2%;
+}
+#heading {
+    font-family: 'Noto Serif', serif;
+    padding-bottom: 20px;
+}
+#form {
+background-color: #1a2849;
+color: white;
+padding:10px 30px 30px 30px;
+border-radius: 20px 20px 0px 0px;
+font-family:'Fira Sans', sans-serif;
+margin-bottom: -1%;
+}
+.inp {
+  border: none;
+  height:25px;
+  background: none;
+  border-bottom: solid;
+  border-color: white;
+  border-width: .1px;
+  color: white;
+}
+
+#submitbutton {
+  border: none;
+  background-color: #1095ff;
+  color: white;
+  border-radius: 50%;
+  font-size: 40px;
+  margin-left: 200px;
+}
+
+#warning1, #warning2, #warning3, #warning4, #warning5 {
+  font-size: 12px;
+}
+</style>
+<script>
+
+
+function validate_name(){
+  var name=document.getElementById("firstname");
+  var check=/^[A-Za-z]+$/;
+  if(name.value==""){
+  return false;
+  }
+ else if(!check.test(name.value)){
+      warning1.innerHTML="Enter a valid first name!";
+      return false;
+  }
+
+  else {
+      warning1.innerHTML="";
+      return true;
+  }
+}
+
+function validate_pass(){
+  var pass=document.getElementById("password");
+
+if(pass.value==""){
+warning2.innerHTML="";
+return false;
+}
+  else if(pass.value.length<8){
+   warning2.innerHTML="The password must contain atleast 8 letters.";
+   return false;
+  }
+  else {
+    warning2.innerHTML="";
+    return true;
+  }
+}
+
+function validate_pass_match(){
+  var pass1 = document.getElementById("password");
+  var pass2 = document.getElementById("confirmpassword");
+
+  if(pass1.value!=pass2.value){
+    warning3.innerHTML="Passwords don't match!";
+    return false;
+  }
+  else {
+    warning3.innerHTML="";
+    return true;
+  }
+}
+function validate_email(){
+var email= document.getElementById("email").value;
+var dot = email.lastIndexOf(".");
+var lastattherate = email.lastIndexOf("@");
+var attherate= email.indexOf("@");
+  if(email ==""){
+   warning5.innerHTML="";
+   return false;
+  }
+  if(lastattherate != attherate){
+     warning5.innerHTML="Please enter a valid email!";
+     return false;
+  }
+  if(email.length>0 && email.length<7){
+   warning5.innerHTML="Please enter a valid email!";
+   return false;
+  }
+  if(dot-attherate<=4){
+  warning5.innerHTML="Please enter a valid email!";
+  return false;
+  }
+  if(dot> email.length-3 || dot==0 || dot==-1){
+     warning5.innerHTML="Please enter a valid email!";
+     return false;
+  }
+warning5.innerHTML="";
+return true;
+}
+
+function validate(){
+  var name= document.getElementById("firstname");
+  var pass= document.getElementById("password");
+  var cpass= document.getElementById("confirmpassword");
+  var email= document.getElementById("email");
+  var m = document.getElementById("male");
+  var f= document.getElementById("female");
+  var o= document.getElementById("other");
+  var display= document.getElementById("userinfo");
+  var sex="";
+  if(name.value=="" || pass.value=="" || cpass.value=="" || email.value==""){
+    alert("Required fields can't be empty!");
+    return false;
+  }
+  if(m.checked==false && f.checked==false && o.checked==false){
+    warning4.innerHTML="Please select a gender.";
+    return false;
+  }
+else
+{   if(m.checked==true){
+    sex=m.value;
+  }
+  if(f.checked==true){
+    sex=f.value;
+  }
+  if(o.checked==true){
+    sex=o.value;
+  }
+  if(validate_name()==true && validate_pass()==true && validate_pass_match()==true && validate_email()==true ){
+
+  var myJSON = '{"name": "", "lastname":"", "pass": "", "gender": "", "city": "","email": "" }';
+  var Obj = JSON.parse(myJSON);
+  localStorage.setItem("test", myJSON);
+  Obj.name= name.value;
+  Obj.lastname= document.getElementById("lastname").value;
+  Obj.pass = pass.value;
+  Obj.gender = sex;
+  Obj.city= document.getElementById("city").value;
+  Obj.email= email.value;
+
+  // tablehead.innerHTML="Information entered by the user";
+  // cell1.innerHTML=  "Name:" +Obj.name+ Obj.lastname;
+  // cell2.innerHTML=  "Pass:" +Obj.pass;
+  // cell3.innerHTML=  "Gender"+ Obj.gender;
+  // cell4.innerHTML=  "City:"+ Obj.city;
+  // cell5.innerHTML= "Email:"+ Obj.email;
+  // display.style="border:";
+  localStorage.setItem("nm", Obj.name);
+  localStorage.setItem("ln", Obj.name);
+  localStorage.setItem("ps", Obj.pass);
+  localStorage.setItem("gen", Obj.gender);
+  localStorage.setItem("ct", Obj.city);
+  localStorage.setItem("em", Obj.email);
+  window.location.href = 'sample.html';
+}
+else
+return false;
+
+    }
+  }
+
+</script>
+<body>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-lg-4">
+      </div>
+      <div class="col-lg-4" id="main">
+  <h1 align="center" id="heading">SIGN UP</h1>
+  <div id="form">
+    <label for="FirstName"> First Name </label> <br />
+    <input name="FirstName" class="inp" id="firstname" onfocusout="validate_name()">
+    <div id="warning1" style="color:red; font-weight:bold;"> </div><br />
+
+    <label for="LastName"> Last Name </label><br />
+    <input for="LastName" class="inp" id="lastname" placeholder="(optional)"> <br /> <br />
+
+    <label for="password"> Create Password </label><br />
+    <input for="password" class="inp" id="password" type="password" onfocusout="validate_pass();"> <br />
+    <div id="warning2" style="color:red; font-weight:bold;"> </div><br />
+
+    <label for="comfirmpassword"> Confirm Password </label><br />
+    <input for="confirmpassword" class="inp" id="confirmpassword" type="password" onfocusout="validate_pass_match()">
+    <div id="warning3" style="color:red; font-weight:bold;"> </div><br />
+
+    <p> Gender: </p>
+    <label for="male"> Male</label>
+    <input name="gender" id="male" type="radio" value="Male">
+
+    <label for="female"> Female </label>
+    <input name="gender" id="female" type="radio" value="Female">
+
+    <label for="other"> Other </label>
+    <input name="gender" id="other" type="radio" value="Other" ><br />
+    <div id="warning4" style="color:red; font-weight:bold;"> </div> <br />
+
+    <label for="city"> City </label> <br />
+    <input for="city" class="inp" id="city" type="text" placeholder="(optional)"> <br /> <br />
+
+    <label for="email"> Email </label> <br />
+    <input for="email" onfocusout="validate_email()" class="inp" id="email" type="text"> <br />
+    <div id="warning5" style="color:red; font-weight:bold;"> </div>
+    <span> Sign UP
+      <!-- <input type="submit"> -->
+    <button type="submit" onclick="validate();" id="submitbutton"> <i class="fas fa-paper-plane"></i></button>
+  </div>
+</div>
+<div class="col-lg-4 info" >
+  <!-- <h3 id="tablehead"></h3>
+  <table border="1px" style="display:none;" id="userinfo">
+    <tr>
+    <td id="cell1"></td>
+    <td id="cell2"></td>
+  </tr>
+  <tr>
+  <td id="cell3"></td>
+  <td id="cell4"></td>
+</tr>
+<tr>
+<td id="cell5"></td>
+<td id="cell6"></td>
+</tr>
+</table> -->
+</div>
+</div>
+</div>
+
+</body>
+</HTML>

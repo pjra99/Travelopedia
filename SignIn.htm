@@ -1,0 +1,102 @@
+<!DOCTYPE HTML>
+<HTML>
+  <head>
+    <title>
+      Sign In
+    </title>
+    <meta charset="UTF-8">
+    <meta name="viewport"  content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+   <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+  </head>
+  <!-- js -->
+  <script>
+  function validate(){
+    var name = document.getElementById("username");
+    var pass = document.getElementById("password");
+    if(name.value=="" && pass.value==""){
+      warning1.innerHTML="Username can't be empty!";
+      warning2.innerHTML="Password Required!";
+    }
+    if(name.value==""){
+      warning1.innerHTML="Username can't be Empty!";
+      return false;
+    }
+    if(pass.value==""){
+      warning2.innerHTML="Password Required!";
+      warning1.innerHTML="";
+      return false;
+    }
+    else {
+      return true;
+     }
+  }
+  </script>
+  <!-- stylesheet -->
+  <style>
+  body {
+    background-color: #d6e0f0;
+  }
+  .third-col h3 {
+    background-color: #505bda;
+    padding: 6.5%;
+  }
+.third-col {
+  background-color: #505bda;
+  color:white;
+  margin-top: 2%;
+  box-shadow: 10px 10px 10px grey;
+}
+.third-col form {
+  border-radius: 20px 20px 0px 0px;
+  margin: 0%  -4.2% 0% -4.2%;
+  padding: 7%;
+
+  background-color: #1a2849;
+}
+#username , #password {
+background: none;
+border: none;
+border-bottom: solid .1px;
+border-color: white;
+color:white;
+}
+#submitbutton {
+  background: none;
+  border: none;
+  margin-left: 75%;
+  margin-top: -20%;
+}
+.fa-arrow-circle-right{
+  color: white;
+  font-size: 250%;
+}
+.link {
+  margin-top: 10%;
+  font-size: 95%;
+}
+  </style>
+  <body>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-4">
+        </div>
+        <div class="col-md-4">
+        </div>
+        <div class="col-md-4 third-col">
+          <h3>Sign In</h3>
+          <form onsubmit="return validate()">
+            <label for="username"> Username </label> <br />
+            <input type="text" name="username" id="username"><br />
+            <div id="warning1" style=" color: red; font-weight:bold;"> </div> <br />
+            <label for="password" name="password" > Password </label> <br />
+            <input type="password" name="password" id="password"> <br />
+            <div id="warning2" style=" color: red; font-weight:bold;"> </div><br />
+           <a href="SignUp.html" class="link">Don't have an account? Sign Up.</a>
+          <button type="submit" id="submitbutton"> <i class="fas fa-arrow-circle-right"></i></button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </body>
+</HTML>
